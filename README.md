@@ -9,7 +9,8 @@
 * Leandro Diaz
 
 ## Motivación 
-<p>La idea surge por un TP de la materia objetos 2. Ademas, ya que hay pocas herramientas de gestión de proyectos/tareas que sean fácil de utilizar y sean gratuitas. Generalmente son para gestiones de proyectos profesionales, dejando de lado los proyectos no profesionales  </p>
+<p>La idea surge por un TP de la materia objetos 2. Ademas, ya que hay pocas herramientas de gestión de proyectos/tareas que sean fácil de utilizar y sean gratuitas. Generalmente son para gestiones de proyectos profesionales, dejando de lado los proyectos no profesionales</p>
+
 ## ¿Qué es Task-man?
 <p> Es un sistema de gestión de tareas, tanto profesionales como no profesionales </p>
 
