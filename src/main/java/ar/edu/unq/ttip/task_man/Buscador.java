@@ -1,8 +1,15 @@
 package ar.edu.unq.ttip.task_man;
 
+
+
+import ar.edu.unq.ttip.task_man.model.Proyecto;
+import ar.edu.unq.ttip.task_man.model.Tarea;
+
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Buscador {
 
 
