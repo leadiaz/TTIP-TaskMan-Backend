@@ -19,8 +19,9 @@
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 		
-		<property name="hibernate.hbm2ddl.auto">create-drop</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<mapping class="ar.edu.unq.ttip.model.Tarea" />
+		<mapping class="ar.edu.unq.ttip.model.Usuario" />
 		
 	</session-factory>
 </hibernate-configuration>
