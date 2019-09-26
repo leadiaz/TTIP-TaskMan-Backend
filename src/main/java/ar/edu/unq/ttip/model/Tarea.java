@@ -1,9 +1,11 @@
 package ar.edu.unq.ttip.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Tarea {
@@ -11,6 +13,8 @@ public class Tarea {
 	private Long id;
 	private String titulo;
 	private String descripcion;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	public Usuario asignado;
 	public Tarea() {}
 	public Tarea(String titulo, String descripcion) {
 
@@ -34,6 +38,12 @@ public class Tarea {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public Usuario getAsignado() {
+		return asignado;
+	}
+	public void setAsignado(Usuario asignado) {
+		this.asignado = asignado;
 	}
 	
 	

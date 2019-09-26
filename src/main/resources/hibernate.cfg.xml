@@ -22,6 +22,7 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<mapping class="ar.edu.unq.ttip.model.Tarea" />
 		<mapping class="ar.edu.unq.ttip.model.Usuario" />
+		<mapping class="ar.edu.unq.ttip.model.Proyecto" />
 		
 	</session-factory>
 </hibernate-configuration>
