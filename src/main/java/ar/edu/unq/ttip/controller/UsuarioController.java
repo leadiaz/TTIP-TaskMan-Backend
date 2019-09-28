@@ -28,7 +28,7 @@ public class UsuarioController {
 		return new ResponseEntity<List<Usuario>>(this.userService.getAll(),HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json")   
+	@RequestMapping(value = "/usuario", method = RequestMethod.POST, produces = "application/json")   
 	public ResponseEntity<Void> createUser(@RequestBody Usuario user) {
 
 			

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,8 +24,8 @@ public class Usuario {
 	private String apellido;
 	private String email;
 	private String password;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private Set<Proyecto> proyecto = new HashSet<Proyecto>();
+	@ElementCollection(fetch = FetchType.EAGER,targetClass =Long.class)
+	private Set<Long> proyectos = new HashSet<Long>();
 	
 	public Usuario() {}
 	
@@ -87,11 +88,11 @@ public class Usuario {
 		this.password = password; 	
 	}
 
-	public Set<Proyecto> getProyecto() {
-		return proyecto;
+	public Set<Long> getProyecto() {
+		return proyectos;
 	}
 
-	public void setProyecto(Set<Proyecto> proyecto) {
-		this.proyecto = proyecto;
+	public void setProyecto(Set<Long> proyectos) {
+		this.proyectos = proyectos;
 	}
 }
