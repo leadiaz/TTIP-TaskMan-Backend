@@ -33,16 +33,7 @@ public class UsuarioController {
 
 			
 			this.userService.setUser(user);
-//			try {			
-//				MimeMessage msg = sender.createMimeMessage();
-//		         MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 	         
-//		         msgHelper.setTo(user.email);
-//		         msgHelper.setText("Bienvenido/a a Vopros! Empieza ya mismo creando un proyecto");
-//		         msgHelper.setSubject("Bienvenido/a!");
-//		         sender.send(msg);}
-//			catch(Exception e) {e.printStackTrace();}
-
-			return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 
 	}
 	
@@ -74,7 +65,6 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> getUserByUsername(@PathVariable("username") String user) {
 
 			Usuario result = this.userService.getByUsername(user);
-//			System.out.println(result.proyectos);
 			if(result == null) {return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);};
 			return new ResponseEntity<Usuario>(result,HttpStatus.OK);
 

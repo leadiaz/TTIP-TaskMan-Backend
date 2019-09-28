@@ -94,28 +94,9 @@ public class TareaController {
 	        tarea.setAsignado(task.getAsignado());
 	        tarea.setDescripcion(task.getDescripcion());
 
-////	        tarea.setDificultad(task.dificultad);
-////	        tarea.setPrioridad(task.prioridad);
-////	        tarea.setEstado(task.estado);
-////	        tarea.setAsignado(task.asignado);
-////	        tarea.setExpiracion(task.expiracion);
-	         
 	        service.update(tarea);
 	        return new ResponseEntity<Tarea>(tarea, HttpStatus.OK);
 	    }
-//	 
-//	    
-////	    private void notificarIntegrantes(Proyecto proyecto,String asunto,String contenido)throws Exception {
-////	         MimeMessage msg = sender.createMimeMessage();
-////	         MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
-////	         String[] tos = new String[proyecto.miembros.size()];;
-////	         for(int i=0;i<proyecto.miembros.size();i++) {
-////	        	 tos[i]=proyecto.miembros.get(i).email;
-////	         };
-////	         msgHelper.setTo(tos);
-////	         msgHelper.setText(contenido);
-////	         msgHelper.setSubject(asunto);
-////	         sender.send(msg);
-////	    }
+
 
 }
