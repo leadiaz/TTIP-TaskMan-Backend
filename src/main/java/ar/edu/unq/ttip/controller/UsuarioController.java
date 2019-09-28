@@ -61,7 +61,7 @@ public class UsuarioController {
 	
 	
 	
-	@RequestMapping(value = "/user/byUsername/{username}", method = RequestMethod.GET, produces = "application/json")   
+	@RequestMapping(value = "/usuario/login/{username}", method = RequestMethod.GET, produces = "application/json")   
 	public ResponseEntity<Usuario> getUserByUsername(@PathVariable("username") String user) {
 
 			Usuario result = this.userService.getByUsername(user);
