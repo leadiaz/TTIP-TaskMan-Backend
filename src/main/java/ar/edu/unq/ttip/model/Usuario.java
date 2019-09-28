@@ -1,10 +1,17 @@
 package ar.edu.unq.ttip.model;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
@@ -16,6 +23,8 @@ public class Usuario {
 	private String apellido;
 	private String email;
 	private String password;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private Set<Proyecto> proyecto = new HashSet<Proyecto>();
 	
 	public Usuario() {}
 	
@@ -76,5 +85,13 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Proyecto> getProyecto() {
+		return proyecto;
+	}
+
+	public void setProyecto(Set<Proyecto> proyecto) {
+		this.proyecto = proyecto;
 	}
 }
