@@ -31,7 +31,6 @@ public class TareaController {
 	    public ResponseEntity<List<Tarea>> getTareas() {
 	         List<Tarea> tareas = this.service.getAll();
 	        if (tareas == null) {
-	            System.out.println("no Tasks found");
 	            return new ResponseEntity<List<Tarea>>(HttpStatus.NOT_FOUND);
 	        }
 	        return new ResponseEntity<List<Tarea>>(tareas, HttpStatus.OK);
@@ -41,7 +40,6 @@ public class TareaController {
 	    public ResponseEntity<Tarea> getTarea(@PathVariable("id") Long id) {
 	         Tarea tarea= this.service.getById(id);
 	        if (tarea == null) {
-	            System.out.println("Task with id " + id + " not found");
 	            return new ResponseEntity<Tarea>(HttpStatus.NOT_FOUND);
 	        }
 	        return new ResponseEntity<Tarea>(tarea, HttpStatus.OK);
@@ -82,12 +80,9 @@ public class TareaController {
 	    
 	    @RequestMapping(value = "/tarea/{id}", method = RequestMethod.PUT)
 	    public ResponseEntity<Tarea> updateTask(@PathVariable("id") long id, @RequestBody Tarea task ){
-	        System.out.println("Updating Task " + id);
-	         
 	        Tarea tarea = service.getById(id);
 	         
 	        if (tarea==null) {
-	            System.out.println("Task with id " + id + " not found");
 	            return new ResponseEntity<Tarea>(HttpStatus.NOT_FOUND);
 	        }
 	        tarea.setTitulo(task.getTitulo());

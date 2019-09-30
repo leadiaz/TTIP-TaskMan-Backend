@@ -37,7 +37,7 @@ public class UsuarioController {
 
 	}
 	
-	@RequestMapping(value = "/user/search", method = RequestMethod.POST, produces = "application/json")   
+	@RequestMapping(value = "/usuario/buscar", method = RequestMethod.POST, produces = "application/json")   
 	public ResponseEntity<List<Usuario>> searchUser(@RequestBody String user) {
 
 			List<Usuario> results = this.userService.search(user);
@@ -49,7 +49,7 @@ public class UsuarioController {
 	
 	
 	
-	@RequestMapping(value = "/user/search/{val}", method = RequestMethod.GET, produces = "application/json")   
+	@RequestMapping(value = "/usuario/buscar/{val}", method = RequestMethod.GET, produces = "application/json")   
 	public ResponseEntity<List<Usuario>> searchUserName(@PathVariable("val") String user) {
 
 			List<Usuario> results = this.userService.search(user);

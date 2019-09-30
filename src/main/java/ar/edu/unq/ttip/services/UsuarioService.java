@@ -41,12 +41,6 @@ public class UsuarioService {
 	public void update(Usuario user) {
 		userDAO.update(user);
 	}
-	
-//	@Transactional
-//	public Boolean validate(Usuario user){
-//		return userDAO.validate(user);
-//	}
-	
 	@Transactional
 	public List<Usuario> search(String nombre){
 		return userDAO.searchUsers(nombre);
