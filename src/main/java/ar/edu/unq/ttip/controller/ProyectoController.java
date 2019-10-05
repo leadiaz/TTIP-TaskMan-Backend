@@ -53,7 +53,9 @@ public class ProyectoController {
 		else {
 			proyecto.setCreador(user);
 			proyecto.addMiembro(user);
+			user.agregarProyecto(proyecto);
 			long idP=this.proyectService.setProyecto(proyecto);
+			this.userService.update(user);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 	}

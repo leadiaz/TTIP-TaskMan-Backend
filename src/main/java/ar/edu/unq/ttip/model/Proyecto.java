@@ -15,15 +15,19 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Proyecto {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
 	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JsonIgnoreProperties("proyecto")
 	private Usuario creador;
 	
 	@ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@JsonIgnoreProperties("proyecto")
 	private List<Usuario> miembros = new ArrayList<Usuario>();
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Set<Tarea> tareas = new HashSet<Tarea>();

@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Usuario {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO) 
@@ -24,8 +26,9 @@ public class Usuario {
 	private String apellido;
 	private String email;
 	private String password;
-	@ElementCollection(fetch = FetchType.EAGER,targetClass =Long.class)
-	private Set<Long> proyectos = new HashSet<Long>();
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("miembros")
+	private Set<Proyecto> proyectos = new HashSet<Proyecto>();
 	
 	public Usuario() {}
 	
@@ -88,11 +91,15 @@ public class Usuario {
 		this.password = password; 	
 	}
 
-	public Set<Long> getProyecto() {
+	public Set<Proyecto> getProyecto() {
 		return proyectos;
 	}
 
-	public void setProyecto(Set<Long> proyectos) {
+	public void setProyecto(Set<Proyecto> proyectos) {
 		this.proyectos = proyectos;
+	}
+
+	public void agregarProyecto(Proyecto proyecto) {
+		this.proyectos.add(proyecto);	
 	}
 }

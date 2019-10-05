@@ -2,6 +2,8 @@ package ar.edu.unq.ttip.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,11 +17,14 @@ public class Tarea {
 	private String descripcion;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	public Usuario asignado;
+	@Enumerated(EnumType.ORDINAL)
+	public Estado estado;
 	public Tarea() {}
 	public Tarea(String titulo, String descripcion) {
 
 		this.titulo = titulo;
 		this.descripcion = descripcion;
+		this.estado = Estado.CREADA;
 	}
 	public Long getId() {
 		return id;

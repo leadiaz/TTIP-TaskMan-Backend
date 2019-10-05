@@ -61,7 +61,7 @@ public class TareaController {
 
 		 	}
 	    }
-	    @RequestMapping(value = "/task/{id}/{idProyecto}", method = RequestMethod.DELETE)
+	    @RequestMapping(value = "/tarea/{id}/{idProyecto}", method = RequestMethod.DELETE, consumes = "application/json")
 	    public ResponseEntity<Tarea> deleteTask(@PathVariable("id") long id,@PathVariable("idProyecto") long idProy) {
 	        System.out.println("Fetching & Deleting Issue with id " + id);
 	 
