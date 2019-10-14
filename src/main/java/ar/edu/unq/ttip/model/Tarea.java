@@ -50,7 +50,12 @@ public class Tarea {
 	public void setAsignado(Usuario asignado) {
 		this.asignado = asignado;
 	}
-	
-	
 
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 }

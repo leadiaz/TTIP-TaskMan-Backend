@@ -2,6 +2,7 @@ package ar.edu.unq.ttip.controller;
 
 import java.util.List;
 
+import ar.edu.unq.ttip.services.TareaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,9 @@ public class ProyectoController {
 	
 	@Autowired
 	UsuarioService userService= new UsuarioService();
+
+	@Autowired
+	TareaService tareaService = new TareaService();
 	public ProyectoController() {}
     
     
@@ -75,6 +79,20 @@ public class ProyectoController {
 		}
 
 	}
+//	@RequestMapping(value = "proyecto/{id}", method = RequestMethod.PUT, consumes = "application/json")
+//	public ResponseEntity<Void> agregarMiembro(@PathVariable("id") long id, @RequestBody Proyecto proyecto){
+//		Proyecto proyect = proyectService.getById(id);
+//
+//		if(proyect == null) {
+//			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+//		}else {
+//			proyect.setNombre(proyecto.getNombre());
+//			proyect.setMiembros(proyecto.getMiembros());
+//			proyect.setTareas(proyecto.getTareas());
+//			this.proyectService.updateProyecto(proyect);
+//			return new ResponseEntity<Void>(HttpStatus.OK);
+//		}
+//	}
 	
 	
 	@RequestMapping(value = "/proyecto/{id}", method = RequestMethod.GET, produces = "application/json")	
@@ -87,6 +105,18 @@ public class ProyectoController {
 		else {
 			return new ResponseEntity<Proyecto>(proyect,HttpStatus.OK);
 
+		}
+	}
+
+	@RequestMapping(value = "/proyecto/{id}", method = RequestMethod.DELETE, consumes = "application/json")
+	public ResponseEntity<Void> eliminarProyecto(@PathVariable("id") long id){
+		Proyecto proyecto = this.proyectService.getById(id);
+		if (proyecto == null){
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		else{
+			proyecto.getTareas().forEach(tarea -> this.tareaService.delete(tarea.getId()));
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 	}
 }
