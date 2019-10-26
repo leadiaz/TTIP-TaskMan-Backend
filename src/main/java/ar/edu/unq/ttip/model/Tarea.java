@@ -49,7 +49,9 @@ public class Tarea {
 	}
 	public void setAsignado(Usuario asignado) {
 		this.asignado = asignado;
+		this.estado = Estado.EN_PROCESO;
 	}
+
 
 	public Estado getEstado() {
 		return estado;
