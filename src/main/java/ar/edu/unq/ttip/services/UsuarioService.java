@@ -39,6 +39,7 @@ public class UsuarioService {
 	
 	@Transactional
 	public void update(Usuario user) {
+		System.out.println("actualizando " + user.getUsuario());
 		userDAO.update(user);
 	}
 	@Transactional

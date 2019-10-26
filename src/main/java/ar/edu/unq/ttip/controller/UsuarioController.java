@@ -17,7 +17,7 @@ import ar.edu.unq.ttip.model.Usuario;
 import ar.edu.unq.ttip.services.UsuarioService;
 
 @RestController
-@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 public class UsuarioController {
 	@Autowired
 	UsuarioService userService = new UsuarioService();
@@ -38,11 +38,15 @@ public class UsuarioController {
 
 	}
 	@RequestMapping(value = "/usuario/{id}", method = RequestMethod.PUT, produces = "application/json")
-	public ResponseEntity<Void> updateUser(@PathVariable("id") long id, Usuario usuario){
+	public ResponseEntity<Void> updateUser(@PathVariable("id") long id,@RequestBody Usuario usuario){
+	    System.out.println(usuario.getNombre());
 		Usuario user= userService.getById(id);
+		System.out.println("peticion de put, " + user);
 		if(user == null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}else {
+		    System.out.println(usuario.getUsuario());
+            System.out.println(usuario.getProyecto());
 			user.setUsuario(usuario.getUsuario());
 			user.setNombre(usuario.getNombre());
 			user.setApellido(usuario.getApellido());

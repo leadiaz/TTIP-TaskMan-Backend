@@ -19,7 +19,7 @@ import ar.edu.unq.ttip.services.ProyectoService;
 import ar.edu.unq.ttip.services.UsuarioService;
 
 @RestController
-@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 public class ProyectoController {
 	@Autowired
 	ProyectoService proyectService = new ProyectoService();
@@ -45,14 +45,14 @@ public class ProyectoController {
     }
 
 
-	@RequestMapping(value = "/proyecto/{userId}", method = RequestMethod.POST, consumes = "application/json")	
-	public ResponseEntity<Void> nuevoProyecto(@PathVariable("userId") long id,@RequestBody Proyecto proyecto){
+	@RequestMapping(value = "/proyecto/{userId}", method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<Proyecto> nuevoProyecto(@PathVariable("userId") long id,@RequestBody Proyecto proyecto){
 		Usuario user = userService.getById(id);
 		System.out.println(proyecto.getNombre());
 		System.out.println(proyecto.getMiembros());
 		System.out.println(user);
 		if(user == null) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Proyecto>(HttpStatus.NOT_FOUND);
 	}
 		else {
 			proyecto.setCreador(user);
@@ -60,39 +60,52 @@ public class ProyectoController {
 			user.agregarProyecto(proyecto);
 			long idP=this.proyectService.setProyecto(proyecto);
 			this.userService.update(user);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			proyecto.setId(idP);
+			return new ResponseEntity<Proyecto>(proyecto, HttpStatus.OK);
 		}
 	}
 	
 	
-	@RequestMapping(value = "/proyecto/{id}", method = RequestMethod.PUT, consumes = "application/json")	
-	public ResponseEntity<Void> actualizarProyecto(@PathVariable("id") long id,@RequestBody Proyecto proyecto){
+	@RequestMapping(value = "/user/proyecto/{id}", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<Proyecto> actualizarProyecto(@PathVariable("id") long id,@RequestBody Proyecto proyecto){
+        System.out.println("peticion de put");
 		Proyecto proyect = proyectService.getById(id);
 		if(proyect == null) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			System.out.println("no se pudo actualizar");
+			return new ResponseEntity<Proyecto>(HttpStatus.NOT_FOUND);
+		}else {
+
+			proyect.setNombre(proyecto.getNombre());
+			proyect.setMiembros(proyecto.getMiembros());
+			System.out.println(proyect.getMiembros());
+			proyect.setTareas(proyecto.getTareas());
+//			proyect.getMiembros().stream().forEach(u -> u.actualizarProyectos(proyecto));
+//			proyect.getMiembros().stream().forEach(usuario -> this.userService.update(usuario));
+			this.proyectService.updateProyecto(proyect);
+			return new ResponseEntity<Proyecto>(proyect, HttpStatus.OK);
+		}
+
+	}
+
+	@RequestMapping(value = "/proyecto/add={id}", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<Proyecto> agregarMiembro(@PathVariable("id") long id, @RequestBody Proyecto proyecto){
+		
+		Proyecto proyect = this.proyectService.getById(proyecto.getId());
+		Usuario miembro = this.userService.getById(id);
+		System.out.println("usuario Agregado " + miembro.getNombre());
+		if(proyect == null) {
+			return new ResponseEntity<Proyecto>(HttpStatus.NOT_FOUND);
 		}else {
 			proyect.setNombre(proyecto.getNombre());
 			proyect.setMiembros(proyecto.getMiembros());
 			proyect.setTareas(proyecto.getTareas());
+			proyect.addMiembro(miembro);
+			miembro.agregarProyecto(proyect);
 			this.proyectService.updateProyecto(proyect);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			this.userService.update(miembro);
+			return new ResponseEntity<Proyecto>(proyect, HttpStatus.OK);
 		}
-
 	}
-//	@RequestMapping(value = "proyecto/{id}", method = RequestMethod.PUT, consumes = "application/json")
-//	public ResponseEntity<Void> agregarMiembro(@PathVariable("id") long id, @RequestBody Proyecto proyecto){
-//		Proyecto proyect = proyectService.getById(id);
-//
-//		if(proyect == null) {
-//			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-//		}else {
-//			proyect.setNombre(proyecto.getNombre());
-//			proyect.setMiembros(proyecto.getMiembros());
-//			proyect.setTareas(proyecto.getTareas());
-//			this.proyectService.updateProyecto(proyect);
-//			return new ResponseEntity<Void>(HttpStatus.OK);
-//		}
-//	}
 	
 	
 	@RequestMapping(value = "/proyecto/{id}", method = RequestMethod.GET, produces = "application/json")	

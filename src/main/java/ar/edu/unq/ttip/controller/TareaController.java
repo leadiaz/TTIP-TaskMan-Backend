@@ -46,10 +46,10 @@ public class TareaController {
 	    }
 	 
 	 @RequestMapping(value = "/tarea/{idProyecto}", method = RequestMethod.POST, consumes = "application/json")
-	    public ResponseEntity<Void> create(@RequestBody Tarea input, @PathVariable ("idProyecto") long idProyecto) throws Exception{
+	    public ResponseEntity<Tarea> create(@RequestBody Tarea input, @PathVariable ("idProyecto") long idProyecto) throws Exception{
 		 	Proyecto proyecto=this.proyectoService.getById(idProyecto);
 		 	if(proyecto == null) {
-		 		return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
+		 		return new ResponseEntity<Tarea>(HttpStatus.NOT_ACCEPTABLE);
 		 	}
 		 	else {
 				 Tarea tarea = new Tarea(input.getTitulo(),input.getDescripcion());
@@ -57,7 +57,7 @@ public class TareaController {
 		         
 		         proyecto.addTarea(tarea);
 		         this.proyectoService.updateProyecto(proyecto);
-		         return new ResponseEntity<Void>(HttpStatus.OK);
+		         return new ResponseEntity<Tarea>(tarea,HttpStatus.OK);
 
 		 	}
 	    }

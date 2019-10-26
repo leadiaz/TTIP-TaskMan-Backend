@@ -2,6 +2,7 @@ package ar.edu.unq.ttip.model;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,7 +28,7 @@ public class Usuario {
 	private String email;
 	private String password;
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("miembros")
+	//@JsonIgnoreProperties("miembros")
 	private Set<Proyecto> proyectos = new HashSet<Proyecto>();
 	
 	public Usuario() {}
@@ -102,4 +103,18 @@ public class Usuario {
 	public void agregarProyecto(Proyecto proyecto) {
 		this.proyectos.add(proyecto);	
 	}
+
+    public void actualizarProyectos(Proyecto proyecto) {
+	    Optional<Proyecto> proyectoStream = this.proyectos.stream().filter(p ->p.getId() == proyecto.getId()).findFirst();
+        System.out.println("actualizando usuario: " + this.usuario);
+        System.out.println(proyectoStream.isPresent());
+	    if (!proyectoStream.isPresent()){
+	        System.out.println("no existia proyecto");
+            this.proyectos.add(proyecto);
+        }else{
+	        proyectoStream.get().setMiembros(proyecto.getMiembros());
+            proyectoStream.get().setTareas(proyecto.getTareas());
+
+        }
+    }
 }
