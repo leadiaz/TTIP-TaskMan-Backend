@@ -1,5 +1,7 @@
 package ar.edu.unq.ttip.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +18,7 @@ public class Tarea {
 	private String titulo;
 	private String descripcion;
 	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JsonIgnoreProperties ("proyecto")
 	public Usuario asignado;
 	@Enumerated(EnumType.ORDINAL)
 	public Estado estado;

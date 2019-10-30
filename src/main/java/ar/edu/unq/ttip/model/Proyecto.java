@@ -30,6 +30,7 @@ public class Proyecto {
 	@JsonIgnoreProperties("proyecto")
 	private List<Usuario> miembros = new ArrayList<Usuario>();
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("asignado")
 	private Set<Tarea> tareas = new HashSet<Tarea>();
 //	
 	

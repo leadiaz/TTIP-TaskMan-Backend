@@ -92,31 +92,12 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
-    
-    <dependency>
-	    <groupId>io.jsonwebtoken</groupId>
-	    <artifactId>jjwt</artifactId>
-	    <version>0.7.0</version>
-	</dependency>
-	
 	<!-- Spring -->
 	    <dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-web</artifactId>
     	</dependency>
-<!--  
-	<dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>commons-logging</artifactId>
-          <groupId>commons-logging</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-  -->
+
   </dependencies>
   <build>
   <plugins>

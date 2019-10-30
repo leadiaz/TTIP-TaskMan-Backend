@@ -5,17 +5,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Usuario {
@@ -29,6 +23,7 @@ public class Usuario {
 	private String password;
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	//@JsonIgnoreProperties("miembros")
+	@JsonIgnoreProperties({"miembros","creador"})
 	private Set<Proyecto> proyectos = new HashSet<Proyecto>();
 	
 	public Usuario() {}

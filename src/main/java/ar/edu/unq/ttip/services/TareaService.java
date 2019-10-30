@@ -42,4 +42,7 @@ public class TareaService {
 	public List<Tarea> getAll() {
 		return tareaDao.getAll();
 	}
+
+	@Transactional
+    public List<Tarea> getAsignadas(Long id){ return tareaDao.getAsignadas(id);}
 }

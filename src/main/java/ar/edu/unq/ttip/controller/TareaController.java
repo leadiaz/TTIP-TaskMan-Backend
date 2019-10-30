@@ -19,7 +19,7 @@ import ar.edu.unq.ttip.services.ProyectoService;
 import ar.edu.unq.ttip.services.TareaService;
 
 @RestController
-@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class TareaController {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class TareaController {
 	        }
 	        return new ResponseEntity<List<Tarea>>(tareas, HttpStatus.OK);
 	    }
-	
+
 	 @RequestMapping(value = "/tarea/{id}", method = RequestMethod.GET)
 	    public ResponseEntity<Tarea> getTarea(@PathVariable("id") Long id) {
 	         Tarea tarea= this.service.getById(id);
@@ -44,7 +44,14 @@ public class TareaController {
 	        }
 	        return new ResponseEntity<Tarea>(tarea, HttpStatus.OK);
 	    }
-	 
+	 @RequestMapping(value = "/tareas/{idUsuario}", method = RequestMethod.GET)
+	 	public ResponseEntity<List<Tarea>> getAllUsuario(@PathVariable ("idUsuario") Long idUsuario){
+	 		List<Tarea> tareas = this.service.getAsignadas(idUsuario);
+	 		if(tareas.isEmpty()){
+	 			return new ResponseEntity<List<Tarea>>(HttpStatus.NOT_FOUND);
+			}
+	 		return new ResponseEntity<List<Tarea>>(tareas, HttpStatus.OK);
+	 	}
 	 @RequestMapping(value = "/tarea/{idProyecto}", method = RequestMethod.POST, consumes = "application/json")
 	    public ResponseEntity<Tarea> create(@RequestBody Tarea input, @PathVariable ("idProyecto") long idProyecto) throws Exception{
 		 	Proyecto proyecto=this.proyectoService.getById(idProyecto);
@@ -73,7 +80,7 @@ public class TareaController {
 	        }
 	     
     		proyecto.eliminarTarea(task);
-
+            this.service.delete(task.getId());
 	        proyectoService.updateProyecto(proyecto);
 	        return new ResponseEntity<Tarea>(HttpStatus.OK);
 	    }
