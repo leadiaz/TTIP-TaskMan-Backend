@@ -80,8 +80,9 @@ public class TareaController {
 	        }
 	     
     		proyecto.eliminarTarea(task);
+			proyectoService.updateProyecto(proyecto);
             this.service.delete(task.getId());
-	        proyectoService.updateProyecto(proyecto);
+
 	        return new ResponseEntity<Tarea>(HttpStatus.OK);
 	    }
 	    

@@ -1,9 +1,6 @@
 package ar.edu.unq.ttip.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -74,7 +71,13 @@ public class Proyecto {
 	}
 	public void addTarea(Tarea tarea) {this.tareas.add(tarea);}
 	public void eliminarTarea(Tarea tarea) {
-		this.tareas.remove(tarea);
-		
+		System.out.println(tareas.size());
+		Iterator<Tarea> it = tareas.iterator();
+		while (it.hasNext()){
+			if (it.next().getId() == tarea.getId()){
+				it.remove();
+			}
+		}
+		System.out.println(tareas.size());
 	}
 }

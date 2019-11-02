@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Tarea {
@@ -22,12 +24,27 @@ public class Tarea {
 	public Usuario asignado;
 	@Enumerated(EnumType.ORDINAL)
 	public Estado estado;
+	public LocalDate fecha_creacion;
+	public LocalDate fecha_estimada;
+	@Enumerated(EnumType.ORDINAL)
+	public Prioridad prioridad;
+
 	public Tarea() {}
+
+	public LocalDate getFecha_creacion() {
+		return fecha_creacion;
+	}
+
+	public void setFecha_creacion(LocalDate fecha_creacion) {
+		this.fecha_creacion = fecha_creacion;
+	}
+
 	public Tarea(String titulo, String descripcion) {
 
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.estado = Estado.CREADA;
+		this.fecha_creacion = LocalDate.now();
 	}
 	public Long getId() {
 		return id;

@@ -30,7 +30,7 @@ public class TareaService {
 
 	@Transactional
 	public void delete(Long id) {
-		tareaDao.delete(getById(id));
+		tareaDao.delete(this.getById(id));
 	}
 
 	@Transactional
