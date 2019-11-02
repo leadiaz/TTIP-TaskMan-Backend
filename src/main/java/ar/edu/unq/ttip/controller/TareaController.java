@@ -96,6 +96,10 @@ public class TareaController {
 	        tarea.setTitulo(task.getTitulo());
 	        tarea.setAsignado(task.getAsignado());
 	        tarea.setDescripcion(task.getDescripcion());
+	        tarea.setEstado(task.getEstado());
+	        tarea.setFecha_creacion(task.getFecha_creacion());
+	        tarea.setFecha_estimada(task.getFecha_estimada());
+	        tarea.setPrioridad(task.getPrioridad());
 
 	        service.update(tarea);
 	        return new ResponseEntity<Tarea>(tarea, HttpStatus.OK);

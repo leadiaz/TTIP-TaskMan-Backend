@@ -26,6 +26,9 @@ public class Tarea {
 	public Estado estado;
 	public LocalDate fecha_creacion;
 	public LocalDate fecha_estimada;
+
+
+
 	@Enumerated(EnumType.ORDINAL)
 	public Prioridad prioridad;
 
@@ -72,6 +75,13 @@ public class Tarea {
 		this.estado = Estado.EN_PROCESO;
 	}
 
+	public Prioridad getPrioridad() {
+		return prioridad;
+	}
+
+	public void setPrioridad(Prioridad prioridad) {
+		this.prioridad = prioridad;
+	}
 
 	public Estado getEstado() {
 		return estado;
@@ -79,5 +89,12 @@ public class Tarea {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+	public LocalDate getFecha_estimada() {
+		return fecha_estimada;
+	}
+
+	public void setFecha_estimada(LocalDate fecha_estimada) {
+		this.fecha_estimada = fecha_estimada;
 	}
 }
